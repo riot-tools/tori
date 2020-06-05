@@ -13,7 +13,7 @@ function generate() {
   copyFilesToTarget(targetPath, componentName);
   replaceContentWithComponentName(targetPath, componentName);
 
-  console.log(`Generated '${componentName} name in ${targetPath}'`);
+  console.log(`Generated '${componentName}' component in '${targetPath}'`);
 }
 
 function normalizedPath(targetPath) {
