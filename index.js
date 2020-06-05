@@ -21,11 +21,7 @@ function normalizedPath(targetPath) {
 }
 
 function directoryExists(targetPath) {
-  try {
-    return fs.existsSync(targetPath);
-  } catch (err) {
-    return false;
-  }
+  return fs.existsSync(targetPath);
 }
 
 function createDirectory(targetPath) {
