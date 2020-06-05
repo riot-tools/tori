@@ -30,8 +30,8 @@
   },
   "homepage": "https://github.com/graundsco/tori#readme",
   "dependencies": {
-    "@hapi/somever": "^3.0.0",
-    "bin-v8-flags-filter": "^1.2.0"
+    "@hapi/somever": "3.0.0",
+    "bin-v8-flags-filter": "1.2.0"
   },
   "tori": {
     "basePath": "src",
