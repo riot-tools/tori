@@ -97,12 +97,39 @@ function replaceContentWithComponentName(targetPath, componentName) {
   try {
     fs.readdirSync(targetPath).forEach((file) => {
       const content = fs.readFileSync(path.join(targetPath, file), { encoding: 'utf8' });
-      const replacedContent = content.replace(/[c|C]omponent/g, componentName);
 
+      if (
+        !file.includes('.riot') &&
+        !file.includes('.md') &&
+        componentName.includes('-')
+      ) {
+        const componentNameInPascalCase = toPascalCase(componentName);
+
+        const replacedContent = content
+          .replace(/import component/g, `import ${componentNameInPascalCase}`)
+          .replace(
+            /export default component/g,
+            `export default ${componentNameInPascalCase}`
+          );
+
+        fs.writeFileSync(path.join(targetPath, file), replacedContent);
+
+        return;
+      }
+
+      const replacedContent = content.replace(/[c|C]omponent/g, componentName);
       fs.writeFileSync(path.join(targetPath, file), replacedContent);
     });
   } catch (err) {
     console.log(err);
     return err;
   }
+}
+
+function toPascalCase(text) {
+  return text.replace(/(^\w|-\w)/g, clearAndUpper);
+}
+
+function clearAndUpper(text) {
+  return text.replace(/-/, '').toUpperCase();
 }
