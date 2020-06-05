@@ -34,8 +34,6 @@
     "bin-v8-flags-filter": "^1.2.0"
   },
   "tori": {
-    "basePath": "src",
-    "components": "components",
-    "containers": "containers"
+    "basePath": "src"
   }
 }

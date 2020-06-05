@@ -5,10 +5,25 @@ const { tori } = package;
 
 exports.generate = async function generate(cmds) {
   const [componentType, componentPath] = cmds.slice(2);
-  const componentName = componentPath.split('/')[componentPath.split('/').length - 1];
-  const toriPaths = mapToriPaths(tori);
 
-  const realPath = tori && tori.basePath ? toriPaths[componentType] : componentPath;
+  // If we don't pass in a component type, the first param is the actual path
+  const typeSetInConfig = tori && tori.hasOwnProperty(componentType);
+  const actualComponentPath = typeSetInConfig ? componentPath : componentType;
+
+  // The last directory name can be used as the component name
+  const componentName = actualComponentPath.split('/')[
+    actualComponentPath.split('/').length - 1
+  ];
+
+  // Map tori config to actual paths
+  const toriPaths = mapToriPaths(tori, componentName);
+
+  // Choose the proper path to use for generation based on if the type exists in the config.
+  // If it doesn't exist, we should use the basePath in config or the current directory instead.
+  // NOTE: mapToriPaths defaults to creating 'base' path, but it's not guaranteed since tori config might not exist
+  const realPath = typeSetInConfig
+    ? toriPaths[componentType]
+    : path.join(toriPaths.base || __dirname, actualComponentPath);
 
   const targetPath = normalizedPath(realPath);
 
@@ -22,7 +37,7 @@ exports.generate = async function generate(cmds) {
   console.log(`Generated '${componentName}' component in '${targetPath}'`);
 };
 
-function mapToriPaths(toriConfig) {
+function mapToriPaths(toriConfig, componentName) {
   if (!toriConfig) return {};
 
   const base = normalizedPath(path.resolve(__dirname, toriConfig.basePath || ''));
@@ -35,7 +50,7 @@ function mapToriPaths(toriConfig) {
 
     return {
       ...object,
-      [key]: normalizedPath(pathForKey),
+      [key]: normalizedPath(path.join(pathForKey, componentName)),
     };
   }, {});
 
