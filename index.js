@@ -92,7 +92,7 @@ function createDirectory(targetPath) {
 }
 
 function copyFilesToTarget(targetPath, componentName) {
-  const templatesPath = './templates';
+  const templatesPath = normalizedPath('./templates');
 
   try {
     fs.readdirSync(templatesPath).forEach((file) => {
