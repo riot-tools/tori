@@ -1,8 +1,9 @@
 {
-  "name": "tori",
+  "name": "@graunds/tori",
   "version": "0.1.0",
   "description": "Tori - Opinionated Riot component generator",
   "bin": {
+    "@graunds/tori": "bin/create-project",
     "tori": "bin/tori"
   },
   "main": "index.js",
@@ -12,6 +13,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/graundsco/tori.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "riotjs",
