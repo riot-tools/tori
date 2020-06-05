@@ -118,26 +118,12 @@ function replaceContentWithComponentName(targetPath, componentName) {
         encoding: 'utf8',
       });
 
-      if (
-        !file.includes('.riot') &&
-        !file.includes('.md') &&
-        componentName.includes('-')
-      ) {
-        const componentNameInPascalCase = toPascalCase(componentName);
+      const componentNameInPascalCase = toPascalCase(componentName);
 
-        const replacedContent = content
-          .replace(/import component/g, `import ${componentNameInPascalCase}`)
-          .replace(
-            /export default component/g,
-            `export default ${componentNameInPascalCase}`
-          );
+      const replacedContent = content
+        .replace(/ComponentName/g, componentNameInPascalCase)
+        .replace(/[c|C]omponent/g, componentName);
 
-        fs.writeFileSync(path.join(safeTargetPath, file), replacedContent);
-
-        return;
-      }
-
-      const replacedContent = content.replace(/[c|C]omponent/g, componentName);
       fs.writeFileSync(path.join(safeTargetPath, file), replacedContent);
     });
   } catch (err) {

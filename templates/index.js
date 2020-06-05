@@ -1,3 +1,3 @@
-import component from './component.riot';
+import ComponentName from './component.riot';
 
-export default component;
+export default ComponentName;
