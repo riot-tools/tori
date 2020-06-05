@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+'use strict';
+
+const Path = require('path');
+const Somever = require('@hapi/somever');
+const V8FlagsFilter = require('bin-v8-flags-filter');
+
+const REPL_AWAIT_FLAG = '--experimental-repl-await';
+
+if ((process.allowedNodeEnvironmentFlags && process.allowedNodeEnvironmentFlags.has(REPL_AWAIT_FLAG)) ||
+    (!process.allowedNodeEnvironmentFlags && Somever.match(process.version.slice(1), '>=10'))) {
+    process.argv.push(REPL_AWAIT_FLAG);
+}
+
+V8FlagsFilter(Path.join(__dirname, '_tori'), {
+    ignore: ['debug']
+});

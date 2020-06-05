@@ -1,0 +1,36 @@
+{
+  "name": "tori",
+  "version": "0.1.0",
+  "description": "Tori - Opinionated Riot component generator",
+  "bin": {
+    "tori": "bin/tori"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graundsco/opinionated-riot-generator.git"
+  },
+  "keywords": [
+    "riotjs",
+    "riot",
+    "tori",
+    "js",
+    "component",
+    "generator",
+    "cli",
+    "commands"
+  ],
+  "author": "Niklas Lepistö <niklas@demtrees.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graundsco/opinionated-riot-generator/issues"
+  },
+  "homepage": "https://github.com/graundsco/opinionated-riot-generator#readme",
+  "dependencies": {
+    "@hapi/somever": "^3.0.0",
+    "bin-v8-flags-filter": "^1.2.0"
+  }
+}

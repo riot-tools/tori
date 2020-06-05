@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+'use strict';
+
+const Tori = require('../index.js');
+
+(async () => {
+  try {
+
+    await Tori.generate(process.argv)
+
+  } catch (err) {
+    console.error(err.stack);
+
+    process.exit(1);
+  }
+
+})();

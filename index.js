@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-function generate() {
-  const [componentPath] = process.argv.slice(2);
+exports.generate = async function generate(cmds) {
+  const [componentPath] = cmds.slice(2);
   const componentName = componentPath.split('/')[componentPath.split('/').length - 1];
   const targetPath = normalizedPath(componentPath);
 
@@ -14,7 +14,7 @@ function generate() {
   replaceContentWithComponentName(targetPath, componentName);
 
   console.log(`Generated '${componentName}' component in '${targetPath}'`);
-}
+};
 
 function normalizedPath(targetPath) {
   return path.normalize(path.resolve(__dirname, targetPath));
@@ -62,5 +62,3 @@ function replaceContentWithComponentName(targetPath, componentName) {
     return err;
   }
 }
-
-generate();
