@@ -1,10 +1,16 @@
 const fs = require('fs');
 const path = require('path');
+const package = require(path.resolve(__dirname, 'package.json'));
+const { tori } = package;
 
 exports.generate = async function generate(cmds) {
-  const [componentPath] = cmds.slice(2);
+  const [componentType, componentPath] = cmds.slice(2);
   const componentName = componentPath.split('/')[componentPath.split('/').length - 1];
-  const targetPath = normalizedPath(componentPath);
+  const toriPaths = mapToriPaths(tori);
+
+  const realPath = tori && tori.basePath ? toriPaths[componentType] : componentPath;
+
+  const targetPath = normalizedPath(realPath);
 
   if (!directoryExists(targetPath)) {
     createDirectory(targetPath);
@@ -15,6 +21,29 @@ exports.generate = async function generate(cmds) {
 
   console.log(`Generated '${componentName}' component in '${targetPath}'`);
 };
+
+function mapToriPaths(toriConfig) {
+  if (!toriConfig) return {};
+
+  const base = normalizedPath(path.resolve(__dirname, toriConfig.basePath || ''));
+
+  const paths = Object.keys(toriConfig).reduce((object, key) => {
+    if (key === 'basePath') return object;
+
+    const baseDir = toriConfig.basePath ? base : __dirname;
+    const pathForKey = path.resolve(baseDir, toriConfig[key]);
+
+    return {
+      ...object,
+      [key]: normalizedPath(pathForKey),
+    };
+  }, {});
+
+  return {
+    base,
+    ...paths,
+  };
+}
 
 function normalizedPath(targetPath) {
   return path.normalize(path.resolve(__dirname, targetPath));
