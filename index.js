@@ -111,8 +111,6 @@ function copyFilesToTarget(targetPath, componentName) {
 
 function replaceContentWithComponentName(targetPath, componentName) {
   const safeTargetPath = safePath(targetPath);
-  console.log(safeTargetPath);
-  return;
 
   try {
     fs.readdirSync(safeTargetPath).forEach(function replaceFileContent(file) {
