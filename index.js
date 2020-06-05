@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const package = require(path.resolve(__dirname, 'package.json'));
+const package = require(path.resolve('./', 'package.json'));
 const { tori } = package;
 
 exports.generate = async function generate(cmds) {
@@ -26,7 +26,7 @@ exports.generate = async function generate(cmds) {
     // NOTE: mapToriPaths defaults to creating 'base' path, but it's not guaranteed since tori config might not exist
     const realPath = typeSetInConfig
       ? toriPaths[componentType]
-      : path.join(toriPaths.base || __dirname, actualComponentPath);
+      : path.join(toriPaths.base || './', actualComponentPath);
 
     const targetPath = normalizedPath(realPath);
 
@@ -48,14 +48,12 @@ function mapToriPaths(toriConfig, componentName) {
   if (!toriConfig) return {};
 
   try {
-    const base = normalizedPath(
-      path.resolve(__dirname, safePath(toriConfig.basePath) || '')
-    );
+    const base = normalizedPath(path.resolve('./', safePath(toriConfig.basePath) || ''));
 
     const paths = Object.keys(toriConfig).reduce((object, key) => {
       if (key === 'basePath') return object;
 
-      const baseDir = toriConfig.basePath ? base : __dirname;
+      const baseDir = toriConfig.basePath ? base : './';
       const pathForKey = path.resolve(baseDir, safePath(toriConfig[key]));
 
       return {
@@ -75,7 +73,7 @@ function mapToriPaths(toriConfig, componentName) {
 }
 
 function normalizedPath(targetPath) {
-  return path.normalize(path.resolve(__dirname, safePath(targetPath)));
+  return path.normalize(path.resolve('./', safePath(targetPath)));
 }
 
 function directoryExists(targetPath) {
@@ -92,7 +90,7 @@ function createDirectory(targetPath) {
 }
 
 function copyFilesToTarget(targetPath, componentName) {
-  const templatesPath = normalizedPath('./templates');
+  const templatesPath = path.resolve(__dirname, safePath('./templates'));
 
   try {
     fs.readdirSync(templatesPath).forEach((file) => {
