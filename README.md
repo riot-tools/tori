@@ -1,4 +1,4 @@
-# tori - Opinionated Riot component generator
+# tori - Opinionated [Riot](https://riot.js.org) component generator
 tori CLI tool, inspired by [hpal](https://hapipal.com)
 
 ## Installation and usage
