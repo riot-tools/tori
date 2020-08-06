@@ -12,7 +12,7 @@ export const fetchData = async (filter) => {
 
     stream.push({ data: data.results });
 
-    setFetching(true);
+    setFetching(false);
 };
 
 export const fetchOne = async () => {
