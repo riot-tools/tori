@@ -1,0 +1,52 @@
+<component>
+
+    <form>
+
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+            <div class="error"></div>
+        </div>
+
+        <button type='reset'>Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+
+        import withFinalForm from 'riot-final-form';
+
+        export default withFinalForm({
+            formElement() {
+                return this.$('form');
+            },
+            onSubmit(values) {
+                alert(`$api.post('/stuff', ${JSON.stringify(values)})`);
+            },
+            initialValues: {
+                name: ''
+            },
+            validate(values) {
+                const errors = {};
+
+                if (!values.name) errors.name = 'name is required';
+
+                return errors;
+            },
+            onFormChange({ valid }) {
+                const submit = this.formElement().querySelector('[type=submit]');
+                submit.disabled = !valid;
+            },
+            onFieldChange(field, { touched, error }) {
+                const errorEl = field.parentElement.querySelector('.error');
+                if (touched && error) {
+                    if (errorEl) errorEl.innerHTML = error;
+                    field.parentElement.classList.add('error');
+                } else {
+                    if (errorEl) errorEl.innerHTML = '';
+                    field.parentElement.classList.remove('error');
+                }
+            }
+        });
+    </script>
+</component>

@@ -1,0 +1,48 @@
+<component>
+
+  <script>
+
+    import { connect, getState } from 'riot-meiosis';
+    import myActions from './actions';
+
+    // Optional mapping to component
+    const mapToComponent = myActions;
+    // OR
+    const mapToComponent = (ownProps, ownState) => myActions;
+
+
+    const mapToState = (appState, ownState, ownProps) => ({
+      ...ownState,
+      isFetching: appState.isFetching
+    });
+
+    const component = {
+      // state: {},
+      // onBeforeMount(props, state) {
+      // before the component is mounted
+      // },
+      // onMounted(props, state) {
+      // right after the component is mounted on the page
+      // },
+      // onBeforeUpdate(props, state) {
+      // allows recalculation of context data before the update
+      // },
+      // onUpdated(props, state) {
+      // right after the co mponent template is updated after an update call
+      // },
+      // onBeforeUnmount(props, state) {
+      // before the component is removed
+      // },
+      // onUnmounted(props, state) {
+      // when the component is removed from the page
+      // }
+    };
+
+
+    export default connect(mapToState)(component);
+    // OR
+    export default connect(mapToState, mapToComponent)(component);
+  </script>
+
+  <style></style>
+</component>

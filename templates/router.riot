@@ -1,0 +1,14 @@
+<component>
+    <router>
+        <route path="/auth/login"><login /></route>
+        <route path="/user/:id/(.*)?"><edit-user /></route>
+    </route>
+
+    <script>
+        import { Router, Route } from '@riotjs/route'
+
+        export default {
+            components: { Router, Route }
+        };
+    </script>
+</component>
