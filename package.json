@@ -1,9 +1,9 @@
 {
-  "name": "@graunds/tori",
-  "version": "0.1.2",
+  "name": "@riot-tools/tori",
+  "version": "2.0.0",
   "description": "Tori - Opinionated Riot component generator",
   "bin": {
-    "@graunds/tori": "bin/create-project",
+    "riot-tools/tori": "bin/create-project",
     "tori": "bin/tori"
   },
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graundsco/tori.git"
+    "url": "git+https://github.com/riot-tools/tori.git"
   },
   "publishConfig": {
     "access": "public"
@@ -30,9 +30,9 @@
   "author": "Niklas Lepistö <niklas@demtrees.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/graundsco/tori/issues"
+    "url": "https://github.com/riot-tools/tori/issues"
   },
-  "homepage": "https://github.com/graundsco/tori#readme",
+  "homepage": "https://github.com/riot-tools/tori#readme",
   "dependencies": {
     "@hapi/somever": "3.0.0",
     "bin-v8-flags-filter": "1.2.0"

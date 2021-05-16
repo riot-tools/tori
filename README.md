@@ -1,12 +1,15 @@
 # tori - Opinionated Riot component generator
 tori CLI tool, inspired by [hpal](https://hapipal.com)
 
+## !!! BREAKING CHANGE WITH V2 !!!
+With version 2, the package was moved to a different organization (`@graundsco -> @riot-tools`). Please check the updated installation instruction below to use the latest version. There are no other new changes to the functionalities whatsoever.
+
 ## Installation and usage
 > **Note:** tori was developed with **nodejs v12+**, it hasn't been tested in earlier versions
 
 Recommended way:
 ```
-npm i @graunds/tori -D
+npm i @riot-tools/tori -D
 npx tori path/to/component
 ```
 
